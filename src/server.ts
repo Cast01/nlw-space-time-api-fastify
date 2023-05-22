@@ -4,9 +4,11 @@ import fastify from 'fastify'
 
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
+import multipart from '@fastify/multipart'
 
 import { memoriesRoute } from './routes/memories'
 import { authRoutes } from './routes/auth'
+import { uploadRoutes } from './routes/upload'
 const app = fastify()
 
 app.register(cors, {
@@ -15,9 +17,11 @@ app.register(cors, {
 app.register(jwt, {
   secret: 'spacetime',
 })
+app.register(multipart)
 
 app.register(authRoutes)
 app.register(memoriesRoute)
+app.register(uploadRoutes)
 
 app
   .listen({
